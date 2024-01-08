@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="/static/semantic.min.css">
+        <script src="/static/jquery.min.js"></script>
+        <script src="/static/semantic.min.js"></script>
+
+        <title>Music App</title>
+    </head>
+    <body>
+        <div class="ui container" style="margin-top: 50px;">
+            <form action="/" method="GET">
+                <div class="ui form">
+                    <div class="four fields">
+                        <div class="field">
+                            <label>Title</label>
+                            <input type="text" name="name" style="width: 80%;" value="{{ name }}">
+                        </div>
+                        <div class="field">
+                            <label>Artist</label>
+                            <input type="text" name="artist" style="width: 80%;" value="{{ artist }}">
+                        </div>
+                        <div class="field">
+                            <label>Genre</label>
+                            <select class="ui search dropdown" name="genre" style="width: 80%;" value="{{ genre }}">
+                                <option value="Any">Any</option>
+
+                                {% if genre == "Pop" %}
+                                    <option value="Pop" selected="">Pop</option>
+                                {% else %}
+                                    <option value="Pop">Pop</option>
+                                {% endif %}
+
+                                {% if genre == "Rock" %}
+                                    <option value="Rock" selected="">Rock</option>
+                                {% else %}
+                                    <option value="Rock">Rock</option>
+                                {% endif %}
+
+                                {% if genre == "Hip-Hop" %}
+                                    <option value="Hip-Hop" selected="">Hip-Hop</option>
+                                {% else %}
+                                    <option value="Hip-Hop">Hip-Hop</option>
+                                {% endif %}
+
+                                {% if genre == "Classical" %}
+                                    <option value="Classical" selected="">Classical</option>
+                                {% else %}
+                                    <option value="Classical">Classical</option>
+                                {% endif %}
+
+                                {% if genre == "Jazz" %}
+                                    <option value="Jazz" selected="">Jazz</option>
+                                {% else %}
+                                    <option value="Jazz">Jazz</option>
+                                {% endif %}
+
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label style="visibility: hidden;">Search</label>
+                            <button class="ui blue button" type="submit">Filter</button>
+                            <button class="ui red button" type="button" onclick="window.location.href = '/';">Reset</button>
+                            <button class="ui grey button" type="button" onclick="window.location.href = '/logout';">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="ui link cards" style="margin-top: 40px;">
+                {% for s in songs %}
+                    <a class="ui card" href="/song/{{ s.id }}">
+                        <div class="image">
+                            <img src="/static/{{ s.coverart }}">
+                        </div>
+                        <div class="content">
+                            <div class="header">{{ s.name }}</div>
+                            <div class="meta">
+                                <span>{{ s.artist }}</span>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <span class="right floated">
+                                {{ s.length }}
+                            </span>
+                            <span>
+                                <i class="headphones icon"></i>
+                                {{ s.genre }}
+                            </span>
+                        </div>
+                    </a>
+                {% else %}
+                    No songs found
+                {% endfor %}
+            </div>	
+        </div>
+    </body>
+</html>

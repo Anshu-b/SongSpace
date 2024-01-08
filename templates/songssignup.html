@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="/static/semantic.min.css">
+        <script src="/static/jquery.min.js"></script>
+        <script src="/static/semantic.min.js"></script>
+        <title>Music App</title>
+    </head>
+    <body>
+        <style>
+            body {
+                background-color: #DADADA;
+            }
+
+            body > .grid {
+                height: 100%;
+            }
+
+            .image {
+                margin-top: -100px;
+            }
+
+            .column {
+                max-width: 450px;
+            }
+        </style>
+
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2>Create an account</h2>
+                {% if failed %}
+                <div class="ui error message">An account with that username already exists</div>
+                {% endif %}
+
+                <form class="ui large form" id="form" action="/signup" method="POST">
+                    <div class="ui stacked segment">
+                        <div class="field">
+                            <div class="ui input">
+                                <input type="text" name="fullname" placeholder="Full Name">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="ui input">
+                                <input type="text" name="username" placeholder="Username">
+                            </div>
+                        </div>
+
+                        <div class="field"> 
+                            <div class="ui input"> 
+                                <input type="password" name="password" placeholder="Password">
+                        </div>
+                    </div>
+
+                    <div class="ui large teal button" onclick="form.submit();">Register</div>"
+                </div> 
+            </form> 
+            <div class="ui message"> 
+                Already have an account? <a href="/login">Log In</a>
+            </div> </div> </div>
+    </body> 
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head> <title>Welcome to Wonderful Mornings</title>
+</head>
+<body style="padding-left: 80px; background-color:black; border: 15px solid cyan;margin: 24px;">
+  <h1 style="color:pink; margin-top: 20px ;text-align: center; font-family: Comic Sans MS; font-size: 65px;"> Wonderful Mornings</h1>
+  <p style="color:gold; text-align: center; font-family: Comic Sans MS; font-size:35px; font-style: italic;margin-top:-60px;"> Best Place to start your day</p>
+ 
+  <a  style="color:gold; font-family: Comic Sans MS; font-size:20px; text-align: center; padding-right: 25px; " href="/">Home</a> 
+  <a  style="color:gold; font-family: Comic Sans MS; font-size:20px; text-align: center; padding-right: 25px; " href="static/aboutus.html">About Us</a> 
+  <a  style="color:gold; font-family: Comic Sans MS; font-size:20px; text-align: center; padding-right: 25px; " href="static/contactus.html">Contact Us</a> 
+  
+  <p style="color:gray;font-size:25px;"> 
+    Select the items and place the order<p>
+
+    <form action="/addtocart" name="InputForm" method="post"> 
+      <br>
+      <img src="static/food1.png" height=150px width=150px>
+      <h1 style="color: lightblue">Butter Toast</h1>
+      <p style="color:lightblue"> Price: $15.00 </p>
+      <input type="checkbox" name="Toast" value="Toast"> 
+      <hr style="height:2px; color: gray">
+
+      <img src="static/food2.png" height=150px width=150px>
+      <h1 style="color: lightblue">Fries</h1>
+      <p style="color:lightblue"> Price: $10.00 </p>
+      <input type="checkbox" name="Fries" value="Fries"> 
+      <hr style="height:2px; color: gray">
+
+      <img src="static/food3.png" height=150px width=150px>
+      <h1 style="color: lightblue">Cup Cakes</h1>
+      <p style="color:lightblue"> Price: $12.00 </p>
+      <input type="checkbox" name="Cupcake" value="Cupcake"> 
+      <hr style="height:2px; color: gray">
+
+      <img src="static/food4.png" height=150px width=150px>
+      <h1 style="color: lightblue">Ice Cream</h1>
+      <p style="color:lightblue"> Price: $12.00 </p>
+      <input type="checkbox" name="Icecream" value="Icecream"> 
+      <hr style="height:2px; color: gray">
+
+      <div style="color:white; font-family: Comic Sans MS; font-size:20px;"> 
+        <fieldset styke=":width: 50%;"> 
+            <legend>Customer Details:</legend>
+            <a>Name: *</a>
+            <input type="text" id="name" name="name"size="25" required><br><br>
+            <a>Address: *</a>
+            <input type="text" id="address" name="address" size="40"><br><br>
+            <a>State: *</a>
+            <input type="text" id="state" name="state" maxlength="2" size="2" required><br><br>
+            <a>Zip: *</a>
+            <input type="text" id="zip" name="zip" maxlength="5" size="5" required><br><br>
+    </fieldset>
+    </div>
+    <br>
+      <input type ="reset"> 
+      <button type ="submit" value="Submit"> Add to cart</button> <br>
+      </form>
+</body>
+</html>

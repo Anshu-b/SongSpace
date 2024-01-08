@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="/static/semantic.min.css">
+        <script src="/static/jquery.min.js"></script>
+        <script src="/static/semantic.min.js"></script>
+
+        <title>Music App</title>
+    </head>
+    <body>
+        <div class="ui container grid" style="margin-top: 50px;">
+            <div class="ui row">
+                <div class="four wide column">
+                    <img src="/static/{{ coverart }}" style="width: 100%; height: auto;">
+                </div>
+                <div class="ten wide column">
+                    <h1 class="ui header">{{ name }}
+                        <div class="sub header">
+                            {{ artist }}
+                        </div>
+                    </h1>
+                    <br><br>
+
+                    <audio controls style="min-width: 80%;">
+                        <source src="/static/{{ audiofile }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+
+            <div class="ui row">
+                <div class="ui comments" style="width: 80%;">
+                    <h3 class="ui dividing header">Comments</h3>
+
+                    {% for c in comments %}
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="/static/avatar.png" />
+                            </a>
+                            <div class="content">
+                                <a class="author">{{ c.user }}</a>
+                                <div class="text">
+                                    {{ c.message }}
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        No comments have been posted on this song.
+                    {% endfor %}
+
+                    <form class="ui reply form" id="form" style="margin-top: 50px;" action="/addcomment" method="POST">
+                        <input type="hidden" name="songID" value="{{ id }}" />
+                        <div class="field">
+                            <textarea name="comment"></textarea>
+                        </div>
+                        <div class="ui blue labeled submit icon button" onclick="form.submit();">
+                            <i class="icon edit"></i> Post Comment
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,171 @@
+<html> 
+    <head> 
+        <title>InstaSurvey</title>
+        <style> 
+            .wrapper 
+            { 
+                
+                width:90%; 
+                margin:auto; 
+            } 
+            
+            .wrapper_top
+            { 
+                border: 1px solid white; 
+                background-color: #bbc446; 
+                border-radius: 4px; 
+                width:90%; 
+                margin:auto; 
+                margin-top:15px; 
+                height: 130px; 
+                border-bottom:30px solid #1c1b09; 
+            } 
+            
+            .wrapper_bottom 
+            { 
+                
+                border:1px solid white; 
+                background-color: #E6E6E6; 
+                border-radius: 4px; 
+                width:90%; 
+                margin:auto; 
+                margin-top:15px; 
+            } 
+
+            .logo{ 
+                width: 100px; 
+                height: 100px; 
+                margin-top:15px; 
+                margin-left:5%; 
+                filter: drop-shadow(5px 5px 0px grey); 
+            }
+
+            td 
+            { 
+                padding: 10px; 
+            }
+
+
+            .title 
+            {
+                color: white; 
+                margin-left: 145px; 
+                margin-top: -45px; 
+                font-size: 48px;
+                font-family:Georgia,serif; 
+                letter-spacing:3px;
+                filter: drop-shadow(2px 2px 1px black); 
+
+                }
+
+            button 
+            { 
+                
+                width: 170px; 
+                height: 40px; 
+                border: 1px solid white; 
+                background-color: #bbc446; 
+                border-radius: 25px; 
+                filter: drop-shadow(2px 2px 1px black); 
+            }
+
+            body 
+            { 
+                background: linear-gradient(to bottom, white 10%, grey 30%, black 70%); 
+            }
+
+
+                </style>
+    <script>
+        var length = {{questions|length}};
+
+        function next(i) {
+            if (i == length-1) {
+                // Submit
+                document.getElementById("form").submit();
+            } else {
+                // Next
+                document.getElementById("question"+i).style.display = "none";
+                document.getElementById("question"+(i+1)).style.display = "block";
+            }
+        }
+
+        function prev(i) {
+            if (i == 0) {
+                // Do nothing
+            } else {
+                // Prev
+                document.getElementById("question"+i).style.display = "none";
+                document.getElementById("question"+(i-1)).style.display = "block";
+            }
+        }
+    </script>
+    </head>
+    <body> 
+        <div class ="wrapper"> 
+            <div class="wrapper_top"><!--wrapper_top-->
+                <img src="../static/logo.png" class="logo">. 
+                <p class="title"> InstaSurvey</p>
+                </div><!--wrapper_top--end-->
+
+            <!-- onsubmit- to prevent submit when pressing enter key -->
+            <form id="form" action="/submit" method="POST" onsubmit="return false;"> 
+                <input type ="hidden" name="surveryid" value="{{surveyid}}"/>
+            
+                <div class = "wrapper_bottom"> 
+                    <table style="width: 100% ; padding:10px;">
+                    <tr> 
+                        <td > 
+                            <h1>{{surveyid}}</h1>
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td style="border-bottom:4px solid#bbc446;">
+                        </td>
+                    </tr>
+                </table>
+            <!-- Add logic here -->
+                {% for i, question in questions %} 
+                <div style=" display: {{"block" if i == 0 else "none"}};" id="question{{i}}">
+                    <table style="width: 100% ; padding: 10px;"> 
+                        <tr> 
+                            <td>
+                                <p style="font-weight:bold; font-size: large;"  >{{question["question"]}}</p>
+                            </td>
+                        </tr>
+                    <tr> 
+                        <td style ="border-bottom:3px solid grey;"> 
+                    </tr>
+                    {% if question["type"] == "radio" %} 
+                        {% for opt in question["options"] %}
+                            <tr> 
+                                <td> 
+                                    <input type="radio" name="{{question["key"]}}" value="{{opt}}"> {{opt}}" <br>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %} 
+                        <tr> 
+                            <td> 
+                                <input type="text" size="{{question["size"]}}" name="{{question["key"]}}/"
+                            </td>
+                        </tr>   
+                        {% endif %}
+                            <tr> 
+                                <td style="border-bottom:3px solid grey;"> 
+                            </tr>
+                            <tr> 
+                                <td style="text-align:center;"> 
+                                    <button onclick="prev({{i}});">Prev</button>
+                                    <button onclick="next({{i}});">{{"Next" if i+1 < questions|length else "Submit"}}</button>
+                                </td>
+                            </tr>
+                            </table>
+                            </div>
+                            {% endfor %}
+                    <!--end-->
+                </div>
+
+            </form>
+    </body>
+</html>
